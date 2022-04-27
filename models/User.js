@@ -20,6 +20,10 @@ const UserSchema = new Schema({
     },
     profilepic:{
         type:String
+    },
+    adminaccess:{
+        type:Boolean,
+        default:false
     }
 })
 const User = mongoose.model('user' , UserSchema);

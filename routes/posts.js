@@ -34,26 +34,15 @@ router.post('/addblog' , fetchUser ,async(req,res)=>{
 router.put('/likepost/:id' ,fetchUser, async(req,res)=>{
     try {
         const user = await User.findById(req.user.id).select("email , -_id")
-        // let post = await Blogs.findById(req.params.id);
-        // let numlike = await Blogs.find({_id:req.params.id}).select("likes");
+       
         const lists = await Blogs.findById(req.params.id).select("likedBy , -_id");
-        // if(user.email in lists.likedBy){
-        //     res.send("User have already liked")
-        // }
-        // else{
-        // let numlike = await Blogs.findById(req.params.id).select("likes , -_id")
-        // const resp= await Blogs.findByIdAndUpdate(req.params.id , {$set:{likes:numlike.likes+=1}})
-        // const respo = await Blogs.findByIdAndUpdate(req.params.id ,{$push:{likedBy:user.email}})
-        // res.send(lists.likedBy.length)
-        // }
-        // res.send(res.json());
-        // res.send(lists)
+       
         let found = false;
         
             for(i =0 ;i<lists.likedBy.length;i++){
                 if(lists.likedBy[i] === user.email){
                     found = true;
-                    // res.status(400).send("already liked")
+                   
                     break;
                 }
             }
